@@ -17,7 +17,7 @@ Pretty cool, huh ?! The idea of building websites without using a big JS framewo
 
 Here is a list of what interested me :
 
-- I am tired of JS frameworks that need their own dev server and that can be really slow
+- I am tired of JS frontend frameworks that need their own dev server and that can be really slow
 - I also tend to dislike build processes, as they can be long
 - Some frameworks or meta-frameworks can be complex and unintuitive
 - We can have the frontend built alongside the backend, which simplifies processes since there is no compatibility issues
@@ -25,7 +25,7 @@ Here is a list of what interested me :
 
 ## Side note on JS frameworks
 
-Even though I said I was tired of JS frameworks, it was because of the ecosystem around them. I actually love frameworks like Vue or Svelte because the fact that you can split youe application in simple testable components is amazing !
+Even though I said I was tired of JS frameworks, it was because of the ecosystem around them. I actually love frameworks like Vue or Svelte because the fact that you can split your application in simple testable components is amazing !
 
 There are also a lot of tools built (sometimes built-in) for these frameworks that makes your life really easier, like stores, component libraries, etc.
 
@@ -38,9 +38,9 @@ To recap what I said, here is a list of the things I want :
 - A very simple framework being easy to understand
 - No hidden or unintuitive features
 - Separation into components
-- No template files, templates in the component files
+- No separate template files, templates in the component files
+- Easy-to-write and understand templates (via string interpolation)
 - Ability to write styles and/or scripts alongside the HTML
-- No Node.JS
 - Static file serving
 - Automatic routing
 
@@ -48,14 +48,23 @@ The framework isn't meant to be complete, it is meant to be "good-enough" to bui
 
 ## The backend
 
-Interestingly, I gave a lot of thought about which backend to choose.
+I gave a lot of thought about which backend to choose, because this is where most of the work will be.
 
-I initially thought of Express and other JS/TS backend servers after I watched Ethan Niser's video on [the BETH stack](https://www.youtube.com/watch?v=cpzowDDJj24). However, I don't think using JS backends in my context makes sense, because of their performance and complex ecosystem.
+Here are the options I considered :
 
-I also saw a lot of people using HTMX with Django, which makes a lot of sense. I think they work really well together, but I am not a fan of the templating (and I didn't really want to go with Python).
+- Express JS : very popular, very inuitive, but performance might be an issue
+- Elysia: the one used in Ethan Niser's video on [the BETH stack](https://www.youtube.com/watch?v=cpzowDDJj24), with JSX support, but not top-of-the-pack performance
+- Django: also very popular, especially alongside HTMX, but I don't really like the templating and performance
+- Go : very good performance, interesting language with many built-in tools, but unintuitive templating IMO.
+- C# / .NET Core : good performance, great string interpolation, but might be a bit complex for simple applications.
 
-I finally settled onto Go because it provides good performance, isn't very complicated and has built-in tools for HTTP servers and HTML templating.
+Based on this quick comparison and even though I wanted to distance myself from JS/TS for this project, I decided to try Elysia for its easy setup and JSX support.
 
 ## The structure
 
-Based on my requirements, I 
+Based on my requirements, I have a few folders and files in mind to create. Here is a non-exhaustive list :
+
+- `routes` : Folder where we will place html files that will be automatically served. These html files are the 'base' of our pages onto which we will incorporate our components
+- `components` : Folder where will will have our components
+- `public` : Static files to be served
+- `src` : Folder where I will put the custom code for the framework (may be placed in a library in the future)
