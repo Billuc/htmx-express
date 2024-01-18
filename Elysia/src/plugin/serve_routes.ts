@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 import Elysia from "elysia";
+import { html } from "@elysiajs/html";
 
 const serve_route = async (path: string) => {
   const sanitizedPath = path.replace(/\/$/, "");
@@ -15,11 +16,9 @@ const serve_route = async (path: string) => {
   return $.html();
 };
 
-export const serveRoutePlugin = new Elysia().get(
-  "/*",
-  async ({ path, set }) => {
+export const serveRoutePlugin = new Elysia()
+  .use(html())
+  .get("/*", async ({ path, set }) => {
     const html = await serve_route(path);
-    set.headers["Content-Type"] = "text/html";
     return html;
-  }
-);
+  });
