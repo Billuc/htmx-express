@@ -1,41 +1,32 @@
-class ComponentStore {
-  static readonly _instance = new ComponentStore();
-  components: Record<string, Component> = {};
+import { Component } from "./component";
+
+export class ComponentStore {
+  private static readonly _instance: ComponentStore = new ComponentStore();
+  private _components: Map<string, Component<any>>;
 
   private constructor() {
-    this.components = {};
+    this._components = new Map();
   }
 
-  static getStore() {
+  public static get instance(): ComponentStore {
     return ComponentStore._instance;
   }
-}
 
-class ComponentStoreInstance {
-  components: Record<string, Component>;
-  accumulatedComponents: Set<string>;
+  public getComponent(name: string): Component<any> {
+    const component = this._components.get(name);
 
-  constructor(components: Record<string, Component>) {
-    this.components = components;
-    this.accumulatedComponents = new Set();
+    if (!component) {
+      throw new Error(`Component ${name} not found`);
+    }
+
+    return component;
   }
 
-  get(component: string) {
-    return this.components[component];
-  }
-}
+  public addComponent(component: Component<any>) {
+    if (this._components.has(component.name)) {
+      throw new Error(`Component ${component.name} already exists`);
+    }
 
-function createComponent<T>(
-  name: string,
-  componentDefinition: {
-    style?: string;
-    render: (props: T, store: ComponentStore) => string | Promise<string>;
-    script?: string;
+    this._components.set(component.name, component);
   }
-): (props: T) => Promise<string> {
-  const store = ComponentStore.getStore();
-  store.components[name] = componentDefinition;
-
-  // Add accumulated styles
-  return async (props: T) => await componentDefinition.render(props, store);
 }
