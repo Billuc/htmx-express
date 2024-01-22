@@ -12,10 +12,12 @@ export default function htmx_render<TProps>(
 
   const styleHead = `
     <head hx-head="merge">
-        ${accumulatedStyles.map(
-          (n) =>
-            `<link rel="stylesheet" href="/resources/${n}.css" hx-preserve="true"/>`
-        )}
+        ${accumulatedStyles
+          .map(
+            (n) =>
+              `<link rel="stylesheet" href="/resources/${n}.css" hx-preserve="true"/>`
+          )
+          .join("\n")}
     </head>
   `;
 

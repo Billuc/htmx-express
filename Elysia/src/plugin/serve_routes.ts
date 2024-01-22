@@ -20,7 +20,7 @@ const serve_route = async (path: string) => {
   return $.html();
 };
 
-export const serveRoutePlugin = new Elysia()
+export const serveRoutesPlugin = new Elysia()
   .use(html())
   .get("/*", async ({ path, set }) => {
     const html = await serve_route(path);
