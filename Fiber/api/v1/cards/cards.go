@@ -27,5 +27,5 @@ func getCards(c *fiber.Ctx) error {
 		return c.Status(500).SendString(err.Error())
 	}
 
-	return c.SendStatus(200)
+	return c.Render("cards/card-list", fiber.Map{"Cards": cards})
 }
