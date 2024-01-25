@@ -1,13 +1,15 @@
 package models
 
+import "database/sql"
+
 type Card struct {
-	ID            int
+	ID            string
 	Title         string
 	Description   string
 	HasDate       bool
 	Date          string
 	Frequency     int
 	FrequencyUnit string
-	TagID         int
-	ParentID      int
+	TagID         sql.NullString
+	ParentID      sql.NullString
 }

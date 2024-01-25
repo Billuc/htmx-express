@@ -1,0 +1,29 @@
+<div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+  <button @click="showModal = !showModal">New Card</button>
+
+  <div
+    x-cloak
+    x-transition.opacity
+    x-show="showModal"
+    class="modal-backdrop"
+  ></div>
+
+  <div x-cloak x-transition.opacity x-show="showModal" class="modal-card">
+    <div class="modal-card-body">
+      <form
+        hx-post="/api/v1/cards"
+        hx-swap="afterend"
+        hx-target="closest .card-list"
+      >
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" class="form-control" />
+        </div>
+
+        <div class="form-actions">
+          <input type="submit" value="Create" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
