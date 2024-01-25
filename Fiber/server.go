@@ -17,6 +17,8 @@ func main() {
 		return c.Render("cards/index", fiber.Map{}, "layout")
 	})
 
+	app.Static("/assets", "./assets")
+
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("index", fiber.Map{"Name": "World"}, "layout")
 	})

@@ -1,4 +1,8 @@
-<div x-data="{ showModal: false }" @keydown.window.escape="showModal = false">
+<div
+  x-data="{ showModal: false }"
+  @keydown.window.escape="showModal = false"
+  class="modal"
+>
   <button @click="showModal = !showModal">New Card</button>
 
   <div
@@ -12,8 +16,8 @@
     <div class="modal-card-body">
       <form
         hx-post="/api/v1/cards"
-        hx-swap="afterend"
-        hx-target="closest .card-list"
+        hx-swap="beforeend"
+        hx-target="previous .card-list"
       >
         <div class="form-group">
           <label for="title">Title</label>

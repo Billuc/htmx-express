@@ -1,4 +1,6 @@
-<div class="card-list">
-  {{range .Cards}} {{template "cards/card" .}} {{end}} {{template
-  "cards/create_card"}}
+<div class="cards">
+  <div class="card-list">
+    {{range .Cards}} {{template "cards/card" .}} {{end}}
+  </div>
+  {{template "cards/create_card"}}
 </div>
