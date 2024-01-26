@@ -30,6 +30,7 @@ func getCards(c *fiber.Ctx) error {
 		return c.Status(500).SendString(err.Error())
 	}
 
+	// try gomponents
 	return c.Render("cards/card_list", fiber.Map{"Cards": cards})
 }
 
